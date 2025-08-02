@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": ">=23"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docker:build": "docker build -t k8s-study .",
+    "docker:run": "docker run -p 3000:3000 k8s-study",
+    "start": "node src/app.ts"
   },
   "repository": {
     "type": "git",
