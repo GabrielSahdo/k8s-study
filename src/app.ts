@@ -17,7 +17,7 @@ const app = Fastify({
 registerRoute(app, new HealthRoute());
 
 try {
-    await app.listen({ port: 3000 });
+    await app.listen({ port: 3000, host: '0.0.0.0' });
     app.log.info(`Server listening on http://localhost:3000`);
 } catch (err) {
     app.log.error(err);
