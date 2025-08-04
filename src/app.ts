@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import { HealthRoute } from './routes/health.route.ts';
+import { ErrorRoute } from './routes/error.route.ts';
 import { BaseRoute } from './routes/base.route.ts';
 
 function registerRoute(fastifyApp: any, route: BaseRoute) {
@@ -15,6 +16,7 @@ const app = Fastify({
 });
 
 registerRoute(app, new HealthRoute());
+registerRoute(app, new ErrorRoute());
 
 try {
     await app.listen({ port: 3000, host: '0.0.0.0' });
