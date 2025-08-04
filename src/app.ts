@@ -2,6 +2,9 @@ import Fastify from 'fastify';
 import { HealthRoute } from './routes/health.route.ts';
 import { ErrorRoute } from './routes/error.route.ts';
 import { BaseRoute } from './routes/base.route.ts';
+import { initDatabase } from './db/connection.ts';
+import { UserGateway } from './gateways/user.gateway.ts';
+import { GetUsersRoute } from './routes/getUsers.route.ts';
 
 function registerRoute(fastifyApp: any, route: BaseRoute) {
     fastifyApp.route({
@@ -15,6 +18,10 @@ const app = Fastify({
     logger: true,
 });
 
+const db = initDatabase();
+const userGateway = new UserGateway(db);
+
+registerRoute(app, new GetUsersRoute(userGateway));
 registerRoute(app, new HealthRoute());
 registerRoute(app, new ErrorRoute());
 
