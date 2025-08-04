@@ -5,6 +5,7 @@ import { BaseRoute } from './routes/base.route.ts';
 import { initDatabase } from './db/connection.ts';
 import { UserGateway } from './gateways/user.gateway.ts';
 import { GetUsersRoute } from './routes/getUsers.route.ts';
+import { CreateUserRoute } from './routes/createUser.route.ts';
 
 function registerRoute(fastifyApp: any, route: BaseRoute) {
     fastifyApp.route({
@@ -22,6 +23,7 @@ const db = initDatabase();
 const userGateway = new UserGateway(db);
 
 registerRoute(app, new GetUsersRoute(userGateway));
+registerRoute(app, new CreateUserRoute(userGateway));
 registerRoute(app, new HealthRoute());
 registerRoute(app, new ErrorRoute());
 
